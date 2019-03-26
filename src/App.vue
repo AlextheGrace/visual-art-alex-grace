@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div class="title-container">
-      <h1>Veckans pris!</h1>
+    <div :class=" data.layout === 'veckans_kortpris' ? 'title-container-pink' : 'title-container'">
+      <h1>{{data.layout === 'veckans_kortpris' ? 'Veckans kortpris!' : 'veckans pris!'}}</h1>
       <span class="line-one"></span>
       <span class="line-two"></span>
       <span class="line-three"></span>
@@ -9,7 +9,7 @@
 
     <img class="product-image" alt="image" src="./assets/blabar.png">
 
-    <div :class=" data.layout === 'something' ? 'splash' : 'splash'">
+    <div :class=" data.layout === 'veckans_kortpris' ? 'splash-pink' : 'splash'">
       <svg width="100%" viewBox="0 0 588 497" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <title>ica-nara-splash</title>
         <g>
@@ -85,10 +85,18 @@ li {
   position: relative;
 }
 
+.title-container-pink {
+  background: #f8b9d4;
+  width: 1080px;
+  padding-top: 10px;
+  padding-bottom: 80px;
+  position: relative;
+}
+
 .line-one {
   width: 1080px;
   position: absolute;
-  top: 230px;
+  top: 223px;
   background: white;
   height: 3px;
 }
@@ -96,21 +104,21 @@ li {
 .line-two {
   width: 1080px;
   position: absolute;
-  top: 240px;
+  top: 230px;
   background: white;
-  height: 1px;
+  height: 3px;
 }
 .line-three {
   width: 1080px;
   position: absolute;
-  top: 260px;
+  top: 250px;
   background: white;
   height: 1px;
 }
 h1 {
   font-family: "ICARubrikBold";
   margin: auto;
-  font-size: 150px;
+  font-size: 140px;
   color: white;
   text-align: center;
 }
@@ -130,8 +138,17 @@ h1 {
   fill: red;
   height: 100px;
   width: 545px;
-  animation: slidein 8s ease-in-out alternate;
-            
+  animation: animate 8s ease-in-out alternate;
+}
+
+.splash-pink {
+  position: absolute;
+  top: 945px;
+  left: 275px;
+  fill: #f8b9d4;
+  height: 100px;
+  width: 545px;
+  animation: animate 12s ease-in-out alternate;
 }
 
 .price-unit {
@@ -151,7 +168,7 @@ h1 {
 }
 .unit-of-measurement {
   font-size: 50px;
-  font-family: "icarubriksiffror-webfont";
+  font-family: "icatext-black-webfont";
   position: absolute;
   top: 300px;
   left: 360px;
@@ -173,7 +190,7 @@ h1 {
   bottom: 60px;
 }
 
-@keyframes slidein {
+@keyframes animate {
   0% {
     -webkit-transform: translateX(-500px) rotate(70deg);
   }
@@ -207,36 +224,19 @@ h1 {
   50% {
     -webkit-transform: rotate(0deg);
   }
-  55% {
-
-  }
-
-  60% {
-
-  }
-
-  65% {
-    
-  }
-  70% {
-
-  }
-
-  75% {
-   -webkit-transform: translateX(300px) rotate(30deg);
-  }
+ 
 
   80% {
+    -webkit-transform: translateX(500px) rotate(30deg);
+  }
+  90% {
     -webkit-transform: translateX(10000px) rotate(70deg);
   }
-  
 }
-
 </style>
 
 <script>
 import dataAdvert from "./data/advdata.json";
-
 export default {
   name: "app",
   data() {
